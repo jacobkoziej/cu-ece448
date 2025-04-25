@@ -2,8 +2,12 @@
   description = "The Cooper Union - ECE 448: Power Electronics";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    jacobkoziej = {
+      url = "github:jacobkoziej/nur-packages";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
   };
 
   outputs =
@@ -21,14 +25,23 @@
 
       in
       {
-        devShells.default = pkgs.mkShellNoCC (
+        devShells.default = pkgs.mkShell (
           let
             pre-commit-bin = "${lib.getBin pkgs.pre-commit}/bin/pre-commit";
+
+            pkgs-jacobkoziej = inputs.jacobkoziej.legacyPackages.${system};
+
+            inherit (pkgs-jacobkoziej.raspberry-pi) openocd;
 
           in
           {
             packages = with pkgs; [
+              cmake
+              gcc-arm-embedded
               mdformat
+              ninja
+              openocd
+              picotool
               pre-commit
               shfmt
               toml-sort
