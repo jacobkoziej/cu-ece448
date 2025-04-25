@@ -46,10 +46,10 @@ includes = [
 [global]
 excludes = [
   "*.cfg",
-  "*.gitignore",
-  "*.gitmodules",
   "*.lock",
   "*.txt",
   ".editorconfig",
+  ".gitignore",
+  ".gitmodules",
   "LICENSE.md",
 ]
