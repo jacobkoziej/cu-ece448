@@ -9,6 +9,8 @@
 #include <hardware/adc.h>
 #include <hardware/dma.h>
 
+#include "ctrl.h"
+
 #define ADC_CHANNEL 0
 #define ADC_PIN     26
 #define ADC_SAMPLES (1 << 14)
@@ -23,6 +25,8 @@ unsigned char adc_buffer[ADC_SAMPLES];
 
 int main(void)
 {
+	ctrl_init();
+
 	adc_gpio_init(ADC_PIN);
 
 	adc_init();
