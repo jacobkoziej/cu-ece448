@@ -8,6 +8,8 @@ add_executable(
 )
 target_link_libraries(
 	firmware
+	hardware_adc
+	hardware_dma
 	pico_runtime
 )
 pico_add_extra_outputs(firmware)
